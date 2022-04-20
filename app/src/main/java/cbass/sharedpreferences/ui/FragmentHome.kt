@@ -45,11 +45,15 @@ class FragmentHome : Fragment() {
             if (aleman == true)
             {
                 cbAle.isChecked = true
+            }else{
+                cbAle.isChecked = false
             }
             ingles = sharedPreferences.getBoolean("ingles", false)
             if(ingles == true)
             {
                 cbIng.isChecked = true
+            }else{
+                cbIng.isChecked = false
             }
             espanol = sharedPreferences.getBoolean("espanol", false)
             if (espanol == true)
@@ -61,12 +65,16 @@ class FragmentHome : Fragment() {
             if (otro == true)
             {
                 cbOtro.isChecked = true
+            }else{
+                cbOtro.isChecked = false
             }
 
             idioma = sharedPreferences.getString("idioma","").toString()
             if(idioma != null)
             {
                 otroLangInput.text = idioma.toEditable()
+            }else{
+                otroLangInput.text = null
             }
 
 
@@ -116,17 +124,28 @@ class FragmentHome : Fragment() {
                     aleman = true
                     sharedPreferences.edit().putBoolean("aleman",aleman).commit()
 
+                }else
+                {
+                    aleman = false
+                    sharedPreferences.edit().putBoolean("aleman",aleman).commit()
                 }
+
                 if (cbEsp.isChecked)
                 {
                     espanol = true
                     sharedPreferences.edit().putBoolean("espanol", espanol).commit()
+                }else{
+                    espanol = false
+                    sharedPreferences.edit().putBoolean("espanol", espanol).commit()
                 }
+
                 if (cbIng.isChecked)
                 {
                     ingles = true
                     sharedPreferences.edit().putBoolean("ingles", ingles).commit()
-
+                }else{
+                    ingles = false
+                    sharedPreferences.edit().putBoolean("ingles", ingles).commit()
                 }
 
                 if(cbOtro.isChecked)
@@ -134,7 +153,12 @@ class FragmentHome : Fragment() {
                     otro = true
                     sharedPreferences.edit().putBoolean("otro",otro).commit()
 
+                }else{
+                    otro = false
+                    sharedPreferences.edit().putBoolean("otro", otro).commit()
+                    sharedPreferences.edit().putString("idioma","").commit()
                 }
+
                 if (nicknameInput.text!!.isNotEmpty())
                 {
                     nombre = nicknameInput.text.toString()
@@ -142,7 +166,11 @@ class FragmentHome : Fragment() {
                 if(otroLangInput.text!!.isNotEmpty())
                 {
                     idioma = otroLangInput.text.toString()
-                }
+                }//else{
+                   // idioma = ""
+
+                //}
+
                 if (ageInput.text!!.isNotEmpty())
                 {
                     edad = ageInput.text.toString()
