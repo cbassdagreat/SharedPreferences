@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import cbass.sharedpreferences.R
 import cbass.sharedpreferences.databinding.FragmentHomeBinding
 
@@ -22,6 +23,7 @@ class FragmentHome : Fragment() {
     var aleman:Boolean = true
     var ingles:Boolean = true
     var espanol:Boolean = true
+    var otro:Boolean = true
 
 
 
@@ -55,13 +57,26 @@ class FragmentHome : Fragment() {
                 cbEsp.isChecked = true
             }
 
+            otro = sharedPreferences.getBoolean("otro",false)
+            if (otro == true)
+            {
+                cbOtro.isChecked = true
+            }
+
+            idioma = sharedPreferences.getString("idioma","").toString()
+            if(idioma != null)
+            {
+                otroLangInput.text = idioma.toEditable()
+            }
+
+
             nombre = sharedPreferences.getString(key,"").toString()
             if (nombre != null)
             {
                 nicknameTitle.text = nombre
                 nicknameInput.text = nombre.toEditable()
             }
-            otroLangInput.isEnabled = false
+           /** otroLangInput.isEnabled = false
             cbOtro.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
                     otroLangInput.isEnabled = true
@@ -69,7 +84,7 @@ class FragmentHome : Fragment() {
                 } else {
                     otroLangInput.isEnabled = false
                 }
-            }
+            }**/
             edad = sharedPreferences.getString("edad","").toString()
             if (edad != null)
             {
@@ -77,11 +92,9 @@ class FragmentHome : Fragment() {
                 //nicknameInput.hint = sharedPreferences.getString(key,"")
             }
 
-            idioma = sharedPreferences.getString("idioma","").toString()
-            if (idioma!=null)
-            {
-                otroLangInput.text = idioma.toEditable()
-            }
+
+
+
 
 
 
@@ -100,24 +113,35 @@ class FragmentHome : Fragment() {
 
                 if (cbAle.isChecked)
                 {
-                    var aleman = true
+                    aleman = true
                     sharedPreferences.edit().putBoolean("aleman",aleman).commit()
 
                 }
                 if (cbEsp.isChecked)
                 {
-                    var espanol = true
+                    espanol = true
                     sharedPreferences.edit().putBoolean("espanol", espanol).commit()
                 }
                 if (cbIng.isChecked)
                 {
-                    var ingles = true
+                    ingles = true
                     sharedPreferences.edit().putBoolean("ingles", ingles).commit()
+
+                }
+
+                if(cbOtro.isChecked)
+                {
+                    otro = true
+                    sharedPreferences.edit().putBoolean("otro",otro).commit()
 
                 }
                 if (nicknameInput.text!!.isNotEmpty())
                 {
                     nombre = nicknameInput.text.toString()
+                }
+                if(otroLangInput.text!!.isNotEmpty())
+                {
+                    idioma = otroLangInput.text.toString()
                 }
                 if (ageInput.text!!.isNotEmpty())
                 {
@@ -128,7 +152,7 @@ class FragmentHome : Fragment() {
                 sharedPreferences.edit().putString("idioma",idioma.toString()).commit()
                 sharedPreferences.edit().putString("nombre",nombre.toString()).commit()
                 sharedPreferences.edit().putString("edad",edad.toString()).commit()
-
+                Navigation.findNavController(requireView()).navigate(R.id.action_fragmentHome_to_fragmentInicial)
 
 
 
