@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import cbass.sharedpreferences.R
 import cbass.sharedpreferences.databinding.FragmentWelcomeBinding
-import cbass.sharedpreferences.model.User
 
 
 class FragmentWelcome : Fragment() {

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_fragmentInicial_to_fragmentWelcome"
             app:destination="@id/fragmentWelcome" />
+        <action
+            android:id="@+id/action_fragmentInicial_to_fragmentHome"
+            app:destination="@id/fragmentHome" />
     </fragment>
     <fragment
         android:id="@+id/fragmentWelcome"
